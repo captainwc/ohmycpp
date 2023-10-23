@@ -1,6 +1,7 @@
 set(SOURCES
     listTest.cpp
     treeTest.cpp
+    treeTest2.cpp
 )
 
 include_directories(../../include)

@@ -42,7 +42,8 @@
 #include <doctest.h>
 #endif
 
-#include "list/List.h"
+#include "list/LNode.h"
+#include"list/ListNode.h"
 #include "tree/TreeNode.h"
 #include "algorithm/Sorter.h"
 #include "algorithm/Utils.h"

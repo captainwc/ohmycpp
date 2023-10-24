@@ -1,5 +1,5 @@
 #include "algorithm/Sorter.h"
-#include "list/List.h"
+#include "list/LNode.h"
 #define DOCTEST
 #include "common.h"
 

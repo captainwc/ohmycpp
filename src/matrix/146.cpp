@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 class Solution {
 public:
 	vector<int> spiralArray(vector<vector<int>>& array) {

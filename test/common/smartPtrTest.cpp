@@ -1,5 +1,4 @@
 #include "common.h"
-#include "list/List.h"
 #include "tree/TreeNode.h"
 #include <memory>
 

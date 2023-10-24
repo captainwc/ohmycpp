@@ -1,35 +1,15 @@
-# tools file
-.cache/
-.vscode/
+*
+!include/
+!src/
+!test/
+!examples/
 
-# binary file
-build/
+!markdown/
 
-# sth don't know even myself
-resources/
+!.clang-format
+!.gitignore
+!CMakeLists.txt
+!README
+!LICENSE
 
-# test frame, and is useless now
-include/test/
-
-# other binary files may scattering somewhere
-*.out
-*.so
-*.o
-*.d
-*.s
-*.S
-
-# office
-*.csv
-*.xlsx
-*.pdf
-
-# img
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.webp
-
-# video
-*.mp4
+include/test/*

@@ -8,6 +8,11 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-add_subdirectory(src)
+option(BUILD_SRC "Build source code" OFF)
+
+if(BUILD_SRC)
+    add_subdirectory(src)
+endif()
+
 add_subdirectory(test)
 add_subdirectory(examples)

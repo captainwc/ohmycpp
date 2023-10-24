@@ -9,7 +9,7 @@
 !.clang-format
 !.gitignore
 !CMakeLists.txt
-!README
+!README.md
 !LICENSE
 
 include/test/*

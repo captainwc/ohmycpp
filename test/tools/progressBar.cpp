@@ -1,7 +1,7 @@
 #include "common.h"
 
 int main() {
-    int total = 111111;
+    int total = 1111;
     for (int i = 1; i <= total; i++) {
         progressBar(i, total, "TEST");
         usleep(5000);

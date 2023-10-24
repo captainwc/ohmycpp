@@ -5,41 +5,63 @@
 #ifndef LEETCODE_CPP_UTILS_H
 #define LEETCODE_CPP_UTILS_H
 
-#include <cstdio>
-#include <cstdlib>
-#include <iostream>
-#include <string>
-#include <vector>
-
 #include <locale.h>
 #include <unistd.h>
 
-#define OUT(x) std::cout << (x) << std::endl;
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <regex>
+#include <string>
+#include <vector>
 
-template <typename T> std::string vector2string(const std::vector<T>& vc) {
+#include "list/ListNode.h"
+
+//==-------------------- Print ----------------------==//
+
+#define OUT(x) std::cout << (x) << std::endl
+
+template <typename T>
+std::string vector2String(const std::vector<T>& vc) {
     std::string ret = "[";
     for (auto x : vc) {
         ret.append(x);
-        ret.append(", ");
+        ret.append(",");
     }
+    ret.pop_back();
     return ret.append("]");
 }
 
-template <typename T> void printVecvor(const std::vector<T>& vc) {
-    for (auto x : vc) {
-        std::cout << x << " ";
+inline std::string linkList2String(ListNode* head) {
+    auto pNode = head;
+    std::string str = "[";
+    while (pNode != nullptr) {
+        str.append(std::to_string(pNode->val) + ",");
+        pNode = pNode->next;
     }
-    std::cout << std::endl;
+    str.pop_back();
+    str.append("]");
+    return str;
 }
 
-// print progress bar
+template <typename T>
+void printVector(std::vector<T>& vc) {
+    OUT(vector2String(vc));
+}
+
+inline void printLinkList(ListNode* head) {
+    OUT(linkList2String(head));
+}
+
+//==----------------- Progress Bar ------------------==//
+
 inline void progressBar(int p, int total, const char* msg = "", int width = 49) {
     printf("\033[s\033[H\033[0m");
     int x = p;
     int y = total;
     double pre = static_cast<double>(p);
     if (total > width) {
-        pre   = pre / (static_cast<double>(total) / width);
+        pre = pre / (static_cast<double>(total) / width);
         total = width;
     }
 
@@ -70,4 +92,24 @@ inline void progressBar(int p, int total, const char* msg = "", int width = 49) 
     printf("\033[u\033[0m");
 }
 
-#endif // LEETCODE_CPP_UTILS_H
+//==----------------- String Op ---------------------==//
+
+inline std::vector<std::string> splitString(std::string str, std::string sep) {
+    std::regex re(sep);
+    std::sregex_token_iterator p(str.begin(), str.end(), re, -1);
+    std::sregex_token_iterator end;
+    std::vector<std::string> vec(p, end);
+    return vec;
+}
+
+//==----------------- LinkList ----------------------==//
+inline ListNode* getLinkList(std::string str) {
+    auto ret = splitString(str, ",");
+    LinkList list;
+    for (auto st : ret) {
+        list.push_back(std::stoi(st));
+    }
+    return list.front();
+}
+
+#endif  // LEETCODE_CPP_UTILS_H

@@ -1,11 +1,15 @@
 # Leetcode Project
 
-This is a LeetCode project written in CPP and managed by CMake. 
+## Brief
+This is a LeetCode project written in CPP and managed by CMake.
 
-In addition to personal problem solutions, it also provides some useful header files, including definitions and wrappers for data structures, printing, logging, and other tools. 
+I plan to implement some data structures, and save Solutions I think make sense here.
 
-It is intended to offer some assistance to those who wish to write LeetCode solutions locally. It can also serve as an example for beginners of CMake (yes, that's me).
+So in addition to personal problem solutions, it also provides some useful header files, including definitions and wrappers for data structures, printing, logging, and other tools. 
 
+It is intended to offer some assistance to those who wish to write LeetCode solutions locally, but can also serve as an example for beginners of CMake (yes, that's me).
+
+## Usage
 You can use it as follows:
 
 Fisrtly you are expected having some tools configured in your environment.
@@ -28,7 +32,7 @@ make -j6
 ./bin/xxx
 ```
 
-## tips
+## Tips
 
 A few tips might be useful.
 

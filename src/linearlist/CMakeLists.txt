@@ -1,5 +1,6 @@
 set(SOURCES
-    206reverseList.cpp
+    19rmNthFromEnd.cpp
+    24swapPairs.cpp
 )
 
 include_directories(../../include)

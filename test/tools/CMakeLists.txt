@@ -1,6 +1,7 @@
 set(SOURCES
     loggerTest.cpp
     progressBar.cpp
+    stringTest.cpp
 )
 
 include_directories(../../include)

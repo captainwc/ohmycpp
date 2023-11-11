@@ -19,8 +19,6 @@
 
 //==-------------------- Print ----------------------==//
 
-#define OUT(x) std::cout << (x) << std::endl
-
 template <typename T>
 std::string vector2String(const std::vector<T>& vc) {
     std::string ret = "[";
@@ -46,11 +44,11 @@ inline std::string linkList2String(ListNode* head) {
 
 template <typename T>
 void printVector(const std::vector<T>& vc) {
-    OUT(vector2String(vc));
+    std::cout << vector2String(vc) << std::endl;
 }
 
 inline void printLinkList(ListNode* head) {
-    OUT(linkList2String(head));
+    std::cout << linkList2String(head) << std::endl;
 }
 
 //==----------------- Progress Bar ------------------==//

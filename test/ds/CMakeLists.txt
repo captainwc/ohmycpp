@@ -5,9 +5,7 @@ set(SOURCES
 )
 
 include_directories(../../include)
-find_library(GTEST_LIB NAMES gtest REQUIRED)
 
-# find_library(GTEST_MAIN_LIB NAMES gtest_main REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 foreach(file ${SOURCES})

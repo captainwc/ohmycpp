@@ -1,6 +1,7 @@
 set(SOURCES
     19rmNthFromEnd.cpp
     24swapPairs.cpp
+    61rotateRightList.cpp
 )
 
 include_directories(../../include)

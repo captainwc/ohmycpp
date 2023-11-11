@@ -45,7 +45,7 @@ inline std::string linkList2String(ListNode* head) {
 }
 
 template <typename T>
-void printVector(std::vector<T>& vc) {
+void printVector(const std::vector<T>& vc) {
     OUT(vector2String(vc));
 }
 

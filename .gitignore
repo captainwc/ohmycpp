@@ -1,15 +1,6 @@
-*
-!include/
-!src/
-!test/
-!examples/
+.cache/
+.vscode/
+bashbuild/
+build/
 
-!markdown/
-
-!.clang-format
-!.gitignore
-!CMakeLists.txt
-!README.md
-!LICENSE
-
-include/test/*
+include/test

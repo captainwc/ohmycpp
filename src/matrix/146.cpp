@@ -61,8 +61,6 @@ private:
 
 int main() {
     vector<vector<int>> array = {{1, 2, 3, 4}, {8, 7, 6, 5}, {12, 11, 10, 9}, {16, 15, 14, 13}};
-    // vector<vector<int>> array = { { 2, 3 } };
-    // vector<vector<int>> array = { { 1 }, { 2 }, { 3 } };
     Solution su;
 
     printVector(su.spiralArray(array));

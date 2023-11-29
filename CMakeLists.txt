@@ -8,7 +8,8 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-option(BUILD_SRC "Build source code" OFF)
+# 把这个关了src总是找不到头文件也很烦。加，都可以加
+option(BUILD_SRC "Build source code" ON)
 
 if (BUILD_SRC)
     add_subdirectory(src)

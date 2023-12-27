@@ -1,5 +1,6 @@
 set(SOURCES
     treeEG.cpp
+    localTest.cpp
         )
 
 include_directories(../include)

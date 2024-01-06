@@ -29,6 +29,7 @@ struct TreeNode {
     }
 
     ~TreeNode() {
+        // @warn gtest不能正常返回，可能是因为这里
         delete left;
         delete right;
         delete parent;

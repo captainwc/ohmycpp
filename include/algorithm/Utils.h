@@ -15,6 +15,7 @@
 #include <filesystem>
 #include <iomanip>
 #include <iostream>
+#include <mutex>
 #include <regex>
 #include <string>
 #include <vector>
@@ -22,6 +23,9 @@
 #include "list/ListNode.h"
 
 namespace utils {
+
+// 这把锁放在头文件里有问题吗？
+std::mutex util_mtx;
 
 //==-------------------- ANSI -----------------------==//
 
@@ -108,24 +112,26 @@ enum LEVEL {
 inline void logWithPos(LEVEL level, const char* filePath, const char* funcName, int line, const char* format, ...) {
     std::filesystem::path path(filePath);
     std::string fileName = path.filename().string();
+    // 输出时间： << "[" << time::getFormatTime().c_str() << "]"
+    std::unique_lock<std::mutex> logLock(util_mtx);
     switch (level) {
         case ERROR:
-            std::cout << FC_RED << "[ERROR]" << FC_GREY << "[" << time::getFormatTime().c_str() << "]"
-                      << "[" << fileName.c_str() << ":" << funcName << ":" << line << "] " << FC_RED;
+            std::cout << FC_RED << "[ERROR]" << FC_GREY << "[" << fileName.c_str() << ":" << funcName << ":" << line
+                      << "] " << FC_RED;
             // printf(FC_RED);
             // printf("[%s][%s][%s:%s:%d] ", "ERROR", time::getFormatTime().c_str(), fileName.c_str(),
             // funcName, line);
             break;
         case WARN:
-            std::cout << FC_YELLOW << "[WARN ]" << FC_GREY << "[" << time::getFormatTime().c_str() << "]"
-                      << "[" << fileName.c_str() << ":" << funcName << ":" << line << "] " << FC_YELLOW;
+            std::cout << FC_YELLOW << "[WARN ]" << FC_GREY << "[" << fileName.c_str() << ":" << funcName << ":" << line
+                      << "] " << FC_YELLOW;
             // printf(FC_YELLOW);
             // printf("[%s][%s][%s:%s:%d] ", "WARN ", time::getFormatTime().c_str(), fileName.c_str(), funcName, line);
             break;
         case DEBUG:
         default:
-            std::cout << "[DEBUG]" << FC_GREY << "[" << time::getFormatTime().c_str() << "]"
-                      << "[" << fileName.c_str() << ":" << funcName << ":" << line << "] " << ANSI_RESET;
+            std::cout << "[DEBUG]" << FC_GREY << "[" << fileName.c_str() << ":" << funcName << ":" << line << "] "
+                      << ANSI_RESET;
             // printf("[%s][%s][%s:%s:%d] ", "DEBUG", time::getFormatTime().c_str(), fileName.c_str(), funcName, line);
             break;
     }
@@ -135,6 +141,7 @@ inline void logWithPos(LEVEL level, const char* filePath, const char* funcName, 
     va_end(args);
     printf(ANSI_RESET);
     putchar('\n');
+    logLock.unlock();
 }
 
 // template <typename... Args>

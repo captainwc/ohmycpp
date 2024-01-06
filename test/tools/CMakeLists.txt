@@ -6,6 +6,7 @@ set(SOURCES
 
 include_directories(../../include)
 
+# 同级都设置过这个 -pthread，但是平级不重复。同一树枝上才累加
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 foreach(file ${SOURCES})

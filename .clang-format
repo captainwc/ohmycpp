@@ -157,7 +157,7 @@ IncludeCategories:
  - Regex:           '.*'
    Priority:        3
    SortPriority:    0
-   CaseSensitive:   false    
+   CaseSensitive:   false
 # include块排序
 IncludeIsMainRegex: '([-_](test|unittest))?$'
 # 缩进修饰符
@@ -243,7 +243,7 @@ RawStringFormats:
      - ParsePartialTestProto
    CanonicalDelimiter: pb
    BasedOnStyle:    google
-# 引用对齐    
+# 引用对齐
 ReferenceAlignment: Pointer
 # 允许重新排版注释
 ReflowComments: true

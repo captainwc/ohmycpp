@@ -51,7 +51,7 @@ int main() {
     Solution su;
 
     vector<string> ret = su.letterCombinations("23");
-    printVector(ret);
+    utils::printer::printVector(ret);
 
     return 0;
 }

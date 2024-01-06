@@ -41,8 +41,8 @@ TEST_CASE("list relevant") {
                 list.push_back(i);
             } else {
                 list.push_front(i);
-			}
+            }
         }
         CHECK_EQ("[9,7,5,3,1,0,2,4,6,8]", list.dump());
-	}
+    }
 }

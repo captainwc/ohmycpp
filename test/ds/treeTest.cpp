@@ -1,16 +1,16 @@
 #define GTEST
 #include "common.h"
- 
+
 class TreeTestSuite : public testing::Test {
 protected:
     static Tree tree;
 
     static int cnt;
 
-    static int toNum(const std::vector<TreeNode*>& st){
+    static int toNum(const std::vector<TreeNode *> &st) {
         int n = st.size();
         std::string str;
-        for(auto p : st){
+        for (auto p : st) {
             str.append(std::to_string(p->val));
         }
         return std::strtol(str.c_str(), nullptr, 10);
@@ -21,21 +21,21 @@ protected:
             return;
         printf("Leaf%d's frame: ", cnt);
         cnt++;
-        for (auto p: frame) {
+        for (auto p : frame) {
             std::cout << p->val << " ";
         }
         printf(" totaly : %d\n", toNum(frame));
     }
 
-/**
- *                     4
- *                /        \
- *               1          8
- *             /  \       /   \
- *            #    3     6     #
- *          / \   / \   / \  /  \
- *         #  #  2  #  5  7 #   #
- */
+    /**
+     *                     4
+     *                /        \
+     *               1          8
+     *             /  \       /   \
+     *            #    3     6     #
+     *          / \   / \   / \  /  \
+     *         #  #  2  #  5  7 #   #
+     */
     void SetUp() override {
         tree.create("4,1,8,a,3,6,a,a,a,2,a,5,7");
     }

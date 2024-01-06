@@ -1,17 +1,18 @@
 cmake_minimum_required(VERSION 3.16)
 project(leetcode)
 
-set(CMAKE_CXX_STANDARD 14)
+# 使用到了 17 的折叠表达式，大概是ss之类的，在 utils::log 中
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 这个变量是默认的吗？AI说是，可是没有补全。可若不是，设置后编译选项也确实传进去了。应当是默认的吧，懒得深究了
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
 
-message("System: ${CMAKE_SYSTEM_NAME}")
+# message("System: ${CMAKE_SYSTEM_NAME}")
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     message(WARNING "主要还是在 Linux 环境下开发，如果要移植到 windows 下，找库这一块好好改改")
     # set(GTEST_ROOT D:/env/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0)

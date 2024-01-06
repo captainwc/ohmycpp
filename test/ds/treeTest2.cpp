@@ -12,7 +12,7 @@
 // }
 
 int main() {
-	auto vals = std::vector<int>{ -1, 1, 2, 3, 4, 5, 6, 7 };
-	auto root = createTree<int>(vals);
-	std::cout << root->val << std::endl;
+    auto vals = std::vector<int>{-1, 1, 2, 3, 4, 5, 6, 7};
+    auto root = createTree<int>(vals);
+    std::cout << root->val << std::endl;
 }

@@ -38,7 +38,7 @@ public:
 int main() {
     Solution su;
     auto list = utils::list::getLinkList("1,2,3,4,5");
-    utils::printer::printLinkList(su.rotateRight(list, 2));
+    utils::printer::printLinkList(su.rotateRight(list.front(), 2));
 
     return 0;
 }

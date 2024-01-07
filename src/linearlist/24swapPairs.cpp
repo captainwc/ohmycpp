@@ -35,7 +35,7 @@ public:
 
 int main() {
     Solution su;
-    ListNode* l1 = utils::list::getLinkList("1,2,3,4");
-    utils::printer::printLinkList(su.swapPairs(l1));
+    LinkList list = utils::list::getLinkList("1,2,3,4");
+    utils::printer::printLinkList(su.swapPairs(list.front()));
     return 0;
 }

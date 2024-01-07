@@ -9,6 +9,7 @@
 #ifndef LIST_NODE_H
 #define LIST_NODE_H
 
+#include <iterator>
 #include <memory>
 #include <string>
 
@@ -28,103 +29,62 @@ struct ListNode {
 
 class LinkList {
 public:
-    LinkList() {
-        head_ = new ListNode();
-        tail_ = head_;
-        size_ = 0;
-    }
+    LinkList();
+    LinkList(ListNode* head, int size);
 
-    LinkList(ListNode* head, int size) {
-        head_ = head;
-        size_ = size;
-    }
+    bool empty() const;
+    int size() const;
 
-    bool empty() {
-        return size_ == 0;
-    }
+    void push_back(int);
+    void push_front(int);
+    void pop_back();
+    void pop_front();
 
-    void push_back(int val) {
-        auto node = new ListNode(val);
-        if (empty()) {
-            head_->next = node;
-            tail_ = node;
-        } else {
-            tail_->next = node;
-            tail_ = node;
-        }
-        size_++;
-    }
+    ListNode* head() const;
+    ListNode* front() const;
+    ListNode* back() const;
 
-    void push_front(int val) {
-        auto node = new ListNode(val);
-        if (empty()) {
-            head_->next = node;
-            tail_ = node;
-        } else {
-            node->next = head_->next;
-            head_->next = node;
-        }
-        size_++;
-    }
+    std::string dump() const;
 
-    void pop_back() {
-        if (empty()) {
-            return;
-        }
-        auto node = head_;
-        while (node->next != tail_) {
-            node = node->next;
-        }
-        delete tail_;
-        tail_ = node;
-        tail_->next = nullptr;
-        size_--;
-    }
-
-    void pop_front() {
-        if (empty()) {
-            return;
-        }
-        auto node = head_->next;
-        head_->next = node->next;
-        delete node;
-        size_--;
-    }
-
-    ListNode* front() {
-        if (empty()) {
-            return nullptr;
-        }
-        return head_->next;
-    }
-
-    ListNode* back() {
-        if (empty()) {
-            return nullptr;
-        }
-        return tail_;
-    }
-
-    int size() {
-        return size_;
-    }
-
-    std::string dump() {
-        std::string str = "[";
-        auto pNode = head_->next;
-        while (pNode != nullptr) {
-            str.append(std::to_string(pNode->val) + ",");
-            pNode = pNode->next;
-        }
-        str.pop_back();
-        str.append("]");
-        return str;
-    }
+    class Iterator;
+    Iterator begin() const;
+    Iterator end() const;
+    const Iterator cbegin() const;
+    const Iterator cend() const;
 
 private:
     int size_;
     ListNode* head_;
     ListNode* tail_;
+};
+
+class LinkList::Iterator {
+public:
+    // 定义一些别名方便复制粘贴
+    using iterator_category = std::forward_iterator_tag;
+    using difference_type = std::ptrdiff_t;
+    using value_type = ListNode;        // 迭代器指向的类型
+    using reference = const ListNode&;  // 迭代器指向类型的引用
+    using pointer = ListNode*;          // 迭代器指向类型的指针
+
+    Iterator() = default;
+    Iterator(pointer);
+
+    Iterator& operator=(const Iterator&);
+    bool operator==(const Iterator&) const;
+    bool operator!=(const Iterator&) const;
+
+    //? 参数 int 不会被使用，只是用做区分。带 int 的是后置
+    //! 后置不返回引用。原因参见实现，因为需要用到local临时变量，返回引用的话就会返回一个栈变量的引用，不行
+    Iterator& operator++();
+    Iterator operator++(int);
+    Iterator& operator--();
+    Iterator operator--(int);
+
+    value_type& operator*();
+
+private:
+    pointer curr_;
 };
 
 #endif  // LIST_NODE_H

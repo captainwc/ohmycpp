@@ -163,7 +163,7 @@ std::string vector2String(const std::vector<T>& vc) {
     return ret.append("]");
 }
 
-inline std::string linkList2String(ListNode* head) {
+inline std::string list2String(const ListNode* head) {
     auto pNode = head;
     std::string str = "[";
     while (pNode != nullptr) {
@@ -175,13 +175,21 @@ inline std::string linkList2String(ListNode* head) {
     return str;
 }
 
+inline std::string list2String(const LinkList& list) {
+    return list2String(list.head());
+}
+
 template <typename T>
 void printVector(const std::vector<T>& vc) {
     std::cout << vector2String(vc) << std::endl;
 }
 
-inline void printLinkList(ListNode* head) {
-    std::cout << linkList2String(head) << std::endl;
+inline void printLinkList(const ListNode* head) {
+    std::cout << list2String(head) << std::endl;
+}
+
+inline void printLinkList(const LinkList& list) {
+    printLinkList(list.front());
 }
 }  // namespace printer
 
@@ -198,13 +206,13 @@ inline std::vector<std::string> splitString(std::string str, std::string sep) {
 
 //==----------------- LinkList ----------------------==//
 namespace list {
-inline ListNode* getLinkList(std::string str) {
+inline LinkList getLinkList(std::string str) {
     auto ret = str::splitString(str, ",");
     LinkList list;
     for (auto st : ret) {
         list.push_back(std::stoi(st));
     }
-    return list.front();
+    return list;
 }
 }  // namespace list
 }  // namespace utils

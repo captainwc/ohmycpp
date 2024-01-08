@@ -7,7 +7,7 @@
 
 TEST_CASE("list relevant") {
     SUBCASE("LNode") {
-        List<int> list;
+        BList<int> list;
         for (int i = 0; i < 10; i++) {
             if (i % 2 == 0)
                 list.push_back(i);

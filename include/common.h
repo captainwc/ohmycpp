@@ -41,7 +41,7 @@
 
 #include "algorithm/Sorter.h"
 #include "algorithm/Utils.h"
-#include "list/LNode.h"
+#include "list/BLNode.h"
 #include "list/ListNode.h"
 #include "log/Logger.h"
 #include "tree/TreeNode.h"

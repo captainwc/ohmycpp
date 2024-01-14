@@ -59,11 +59,11 @@ public:
         return _size;
     }
 
-    BLNode<T>& front() const {
+    BLNode<T>* front() const {
         return _head;
     }
 
-    BLNode<T>& back() const {
+    BLNode<T>* back() const {
         return _tail;
     }
 };

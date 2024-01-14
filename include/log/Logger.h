@@ -12,16 +12,23 @@
 #include <string>
 #include <utility>
 
-enum LOGLEVEL{trace, info, debug, warn, critical, error};
+enum LOGLEVEL {
+    trace,
+    info,
+    debug,
+    warn,
+    critical,
+    error
+};
 
 class Logger {
 public:
-  template <typename... Args> void log(LOGLEVEL lvl, std::string fmt, Args &&...args) {
-    std::stringstream ss;
-    (ss << ... << std::forward<Args>(args));
-    std::cout << "[LOG]: " << ss.str() << std::endl;
-  }
-
+    template <typename... Args>
+    void log(LOGLEVEL lvl, std::string fmt, Args &&...args) {
+        std::stringstream ss;
+        (ss << ... << std::forward<Args>(args));
+        std::cout << "[LOG]: " << ss.str() << std::endl;
+    }
 };
 
-#endif // LOGGER_H
+#endif  // LOGGER_H

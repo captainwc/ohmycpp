@@ -25,8 +25,8 @@ TEST_CASE("list relevant") {
         CHECK_THROWS_AS(list[10], std::out_of_range);
         CHECK_THROWS_AS(list[-1], std::out_of_range);
 
-        list.insert(list.head, 0);
-        list.insert(list.head->next->next->next, 0);
+        list.insert(list.front(), 0);
+        list.insert(list.front()->next->next->next, 0);
         list.insert(list.tail, 0);
         CHECK_EQ(list.size(), 13);
 

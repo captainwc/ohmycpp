@@ -48,9 +48,9 @@ AccessModifierOffset: -4
 # 开括号(开圆括号、开尖括号、开方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在开括号后换行)
 AlignAfterOpenBracket: Align
 # 连续赋值时，对齐所有等号
-AlignConsecutiveAssignments: None
+AlignConsecutiveAssignments: true
 # 连续声明时，对齐所有声明的变量名
-AlignConsecutiveDeclarations: false
+AlignConsecutiveDeclarations: true
 # 连续宏声明时，对齐空格 #clang-format-10 可用
 AlignConsecutiveMacros: true
 # 对齐连接符: DontAlign(不对齐)， Left(左对齐), Right(右对齐)

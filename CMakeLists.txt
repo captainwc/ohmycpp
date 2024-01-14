@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(leetcode)
 
 # 使用到了 17 的折叠表达式，大概是ss之类的，在 utils::log 中
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 这个变量是默认的吗？AI说是，可是没有补全。可若不是，设置后编译选项也确实传进去了。应当是默认的吧，懒得深究了

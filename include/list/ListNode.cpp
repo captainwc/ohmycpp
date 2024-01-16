@@ -136,6 +136,10 @@ LinkList::Iterator::value_type& LinkList::Iterator::operator*() {
     return *curr_;
 }
 
+LinkList::Iterator::pointer LinkList::Iterator::operator->() {
+    return curr_;
+}
+
 LinkList::Iterator LinkList::begin() const {
     return Iterator(front());
 }

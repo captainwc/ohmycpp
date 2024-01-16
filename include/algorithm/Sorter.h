@@ -9,7 +9,7 @@
 #include <random>
 #include <vector>
 
-#include "list/LNode.h"
+#include "list/BLNode.h"
 
 template <typename C>
 class Sorter {

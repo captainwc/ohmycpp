@@ -63,8 +63,8 @@ public:
         return _size;
     }
 
-    BLNode<T>* front() const {
-        return _dummy->next;
+    BLNode<T>& front() const {
+        return _head;
     }
 
     BLNode<T>* back() const {

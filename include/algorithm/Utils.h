@@ -15,6 +15,7 @@
 #include <filesystem>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <mutex>
 #include <regex>
 #include <string>
@@ -23,23 +24,6 @@
 #include "list/ListNode.h"  // 提供 List utils
 
 namespace utils {
-
-// 这把锁放在头文件里有问题吗？
-std::mutex util_mtx;
-
-//==-------------------- ANSI -----------------------==//
-
-#define ANSI_RESET "\033[0m"
-#define FC_RED     "\033[31m"
-#define FC_GREEN   "\033[32m"
-#define FC_YELLOW  "\033[33m"
-#define FC_GREY    "\033[90m"
-
-enum COLOR {
-    RED,
-    GREEN,
-    YELLOW
-};
 
 //==--------------------- Time ----------------------==//
 namespace time {
@@ -111,7 +95,7 @@ enum LEVEL {
 // TODO 把c++哪个什么forward传递参数的给整明白，tnnd，一定要写出一个能输出位置的日志函数
 inline void logWithPos(LEVEL level, const char* filePath, const char* funcName, int line, const char* format, ...) {
     std::filesystem::path path(filePath);
-    std::string           fileName = path.filename().string();
+    std::string fileName = path.filename().string();
     // 输出时间： << "[" << time::getFormatTime().c_str() << "]"
     std::unique_lock<std::mutex> logLock(util_mtx);
     switch (level) {

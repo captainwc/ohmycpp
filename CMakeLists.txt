@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(leetcode)
 
-# 使用到了 17 的折叠表达式，大概是ss之类的，在 utils::log 中
+# 什么年代了，谁还用传统 C 嘎嘎
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

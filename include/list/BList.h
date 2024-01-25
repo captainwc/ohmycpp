@@ -17,7 +17,7 @@ template <typename T>
 class BList {
 private:
     int        _size;
-    BLNode<T>* _dummy;
+    BLNode<T>* _head;
     BLNode<T>* _tail;
 
 public:
@@ -127,8 +127,8 @@ private:
 
 template <typename T>
 BList<T>::BList() {
-    _dummy = new BLNode<T>();
-    _tail = _dummy;
+    _head = new BLNode<T>();
+    _tail = _head;
     _size = 0;
 }
 
@@ -136,14 +136,14 @@ template <typename T>
 void BList<T>::push_front(T val) {
     auto node = new BLNode<T>(val);
     if (empty()) {
-        _dummy->next = node;
-        node->prev = _dummy;
+        _head->next = node;
+        node->prev = _head;
         _tail = node;
     } else {
-        node->next = _dummy->next;
-        _dummy->next->prev = node;
-        _dummy->next = node;
-        node->prev = _dummy;
+        node->next = _head->next;
+        _head->next->prev = node;
+        _head->next = node;
+        node->prev = _head;
     }
     _size++;
 }
@@ -152,8 +152,8 @@ template <typename T>
 void BList<T>::push_back(T val) {
     auto node = new BLNode<T>(val);
     if (empty()) {
-        _dummy->next = node;
-        node->prev = _dummy;
+        _head->next = node;
+        node->prev = _head;
         _tail = node;
     } else {
         _tail->next = node;
@@ -168,9 +168,9 @@ BLNode<T>* BList<T>::pop_front() {
     if (empty()) {
         return nullptr;
     }
-    auto pNode = _dummy->next;
-    _dummy->next = pNode->next;
-    pNode->next->prev = _dummy;
+    auto pNode = _head->next;
+    _head->next = pNode->next;
+    pNode->next->prev = _head;
     pNode->next = nullptr;
     pNode->prev = nullptr;
     _size--;
@@ -194,9 +194,9 @@ template <typename T>
 void BList<T>::remove(BLNode<T>* pNode) {
     if (!inList(pNode))
         return;
-    if (pNode == _dummy)
+    if (pNode == _head)
         return;
-    if (pNode == _dummy->next)
+    if (pNode == _head->next)
         pop_front();
     else if (pNode == _tail)
         pop_back();
@@ -209,7 +209,7 @@ void BList<T>::remove(BLNode<T>* pNode) {
 
 template <typename T>
 BLNode<T>* BList<T>::find(T val) const {
-    auto p = _dummy->next;
+    auto p = _head->next;
     while (p != nullptr) {
         if (p->val == val)
             return p;
@@ -246,7 +246,7 @@ void BList<T>::insert(BLNode<T>* pNode, T val) {
 template <typename T>
 std::vector<BLNode<T>*> BList<T>::toVector() const {
     auto ret = new std::vector<T>();
-    auto p = _dummy->next;
+    auto p = _head->next;
     while (p != nullptr) {
         ret->push_back(p);
         p = p->next;
@@ -256,7 +256,7 @@ std::vector<BLNode<T>*> BList<T>::toVector() const {
 
 template <typename T>
 std::string BList<T>::dump() const {
-    auto        p = _dummy->next;
+    auto        p = _head->next;
     std::string str = "[";
     while (p->next != nullptr) {
         str.append(std::to_string(p->val)).append(", ");
@@ -270,7 +270,7 @@ BLNode<T>& BList<T>::operator[](int idx) {
     if (idx < 0)
         throw std::out_of_range("idx shouldn't be negative!");
     int  cnt = 0;
-    auto p = _dummy->next;
+    auto p = _head->next;
     while (cnt < idx && p != nullptr) {
         cnt++;
         p = p->next;

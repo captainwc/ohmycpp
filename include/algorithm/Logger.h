@@ -7,7 +7,9 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+#include <cstdarg>
 #include <filesystem>
+#include <functional>
 #include <iostream>
 #include <mutex>
 
@@ -26,6 +28,12 @@ enum COLOR {
 };
 
 //==--------------------- Log ----------------------==//
+
+#define LOG(level, format, ...) log::logWithPos(level, __FILE__, __FUNCTION__, __LINE__, format, ##__VA_ARGS__)
+#define ERROR(format, ...)      LOG(log::ERROR, format, ##__VA_ARGS__)
+#define DEBUG(format, ...)      LOG(log::DEBUG, format, ##__VA_ARGS__)
+#define WARN(format, ...)       LOG(log::WARN, format, ##__VA_ARGS__)
+
 namespace log {
 enum LEVEL {
     DEBUG,
@@ -33,17 +41,12 @@ enum LEVEL {
     ERROR
 };
 
-#define LOG(level, format, ...) utils::log::logWithPos(level, __FILE__, __FUNCTION__, __LINE__, format, ##__VA_ARGS__)
-#define ERROR(format, ...)      LOG(utils::log::ERROR, format, ##__VA_ARGS__)
-#define DEBUG(format, ...)      LOG(utils::log::DEBUG, format, ##__VA_ARGS__)
-#define WARN(format, ...)       LOG(utils::log::WARN, format, ##__VA_ARGS__)
-
 // TODO 新增 log 到文件
 // TODO 把c++哪个什么forward传递参数的给整明白，tnnd，一定要写出一个能输出位置的日志函数
 inline void logWithPos(LEVEL level, const char* filePath, const char* funcName, int line, const char* format, ...) {
-    static std::mutex logMtx;
+    static std::mutex     logMtx;
     std::filesystem::path path(filePath);
-    std::string fileName = path.filename().string();
+    std::string           fileName = path.filename().string();
     // 输出时间： << "[" << time::getFormatTime().c_str() << "]"
     std::unique_lock<std::mutex> logLock(logMtx);
     switch (level) {

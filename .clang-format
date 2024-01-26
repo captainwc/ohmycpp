@@ -3,42 +3,42 @@ BasedOnStyle: Google
 Language: Cpp
 ColumnLimit: 120
 BraceWrapping:
- # case标签后面
- AfterCaseLabel:  false
- # class定义后面
- AfterClass: false
- # 控制语句后面
- AfterControlStatement: Never
- # enum定义后面
- AfterEnum:       false
- # 函数定义后面
- AfterFunction:   false
- # 命名空间定义后面
- AfterNamespace:  false
- # ObjC定义后面
- AfterObjCDeclaration: false
- # struct定义后面
- AfterStruct:     false
- # union定义后面
- AfterUnion:      false
- #ExternBlock定义后面
- AfterExternBlock: false
- # catch之前
- BeforeCatch:     false
- # else之前
- BeforeElse:      false
- # lambda块之前
- BeforeLambdaBody: false
- # while之前
- BeforeWhile:     false
- # 缩进大括号
- IndentBraces:    false
- # 分割空函数
- SplitEmptyFunction: true
- # 分割空记录
- SplitEmptyRecord: true
- # 分割空命名空间
- SplitEmptyNamespace: true
+  # case标签后面
+  AfterCaseLabel: false
+  # class定义后面
+  AfterClass: false
+  # 控制语句后面
+  AfterControlStatement: Never
+  # enum定义后面
+  AfterEnum: false
+  # 函数定义后面
+  AfterFunction: false
+  # 命名空间定义后面
+  AfterNamespace: false
+  # ObjC定义后面
+  AfterObjCDeclaration: false
+  # struct定义后面
+  AfterStruct: false
+  # union定义后面
+  AfterUnion: false
+  #ExternBlock定义后面
+  AfterExternBlock: false
+  # catch之前
+  BeforeCatch: false
+  # else之前
+  BeforeElse: false
+  # lambda块之前
+  BeforeLambdaBody: false
+  # while之前
+  BeforeWhile: false
+  # 缩进大括号
+  IndentBraces: false
+  # 分割空函数
+  SplitEmptyFunction: true
+  # 分割空记录
+  SplitEmptyRecord: true
+  # 分割空命名空间
+  SplitEmptyNamespace: true
 
 # 在 @property 后面添加空格, \@property (readonly) 而不是 \@property(readonly).
 ObjCSpaceAfterProperty: true
@@ -48,11 +48,11 @@ AccessModifierOffset: -4
 # 开括号(开圆括号、开尖括号、开方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在开括号后换行)
 AlignAfterOpenBracket: Align
 # 连续赋值时，对齐所有等号
-AlignConsecutiveAssignments: true
+AlignConsecutiveAssignments: Consecutive
 # 连续声明时，对齐所有声明的变量名
-AlignConsecutiveDeclarations: true
+AlignConsecutiveDeclarations: Consecutive
 # 连续宏声明时，对齐空格 #clang-format-10 可用
-AlignConsecutiveMacros: true
+AlignConsecutiveMacros: Consecutive
 # 对齐连接符: DontAlign(不对齐)， Left(左对齐), Right(右对齐)
 AlignEscapedNewlines: Left
 # 水平对齐二元和三元表达式的操作数
@@ -121,7 +121,7 @@ Cpp11BracedListStyle: true
 # 继承最常用的指针和引用的对齐方式
 DerivePointerAlignment: true
 # 关闭格式化
-DisableFormat:   false
+DisableFormat: false
 # 修饰符后放置空行
 EmptyLineAfterAccessModifier: Never
 # 修饰符前放置空行
@@ -132,32 +132,32 @@ ExperimentalAutoDetectBinPacking: false
 FixNamespaceComments: true
 # 需要被解读为foreach循环而不是函数调用的宏
 ForEachMacros:
- - foreach
- - Q_FOREACH
- - BOOST_FOREACH
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
 # 需要解读为if的函数
 IfMacros:
- - KJ_IF_MAYBE
-IncludeBlocks:   Regroup
+  - KJ_IF_MAYBE
+IncludeBlocks: Regroup
 # 对#include进行排序，匹配了某正则表达式的#include拥有对应的优先级，匹配不到的则默认优先级为INT_MAX(优先级越小排序越靠前)，
 #   可以定义负数优先级从而保证某些#include永远在最前面
 IncludeCategories:
- - Regex:           '^<ext/.*\.h>'
-   Priority:        2
-   SortPriority:    0
-   CaseSensitive:   false
- - Regex:           '^<.*\.h>'
-   Priority:        1
-   SortPriority:    0
-   CaseSensitive:   false
- - Regex:           '^<.*'
-   Priority:        2
-   SortPriority:    0
-   CaseSensitive:   false
- - Regex:           '.*'
-   Priority:        3
-   SortPriority:    0
-   CaseSensitive:   false
+  - Regex: '^<ext/.*\.h>'
+    Priority: 2
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: '^<.*\.h>'
+    Priority: 1
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: '^<.*'
+    Priority: 2
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: '.*'
+    Priority: 3
+    SortPriority: 0
+    CaseSensitive: false
 # include块排序
 IncludeIsMainRegex: '([-_](test|unittest))?$'
 # 缩进修饰符
@@ -172,8 +172,6 @@ IndentGotoLabels: true
 IndentPPDirectives: None
 # 缩进extern块
 IndentExternBlock: AfterExternBlock
-# 缩进模板中的require子句。
-IndentRequires:  false
 # 缩进宽度
 IndentWidth: 4
 # 函数返回类型换行时，缩进函数声明或函数定义的函数名
@@ -212,43 +210,43 @@ PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 200
 # 指针和引用的对齐: Left, Right, Middle
 PointerAlignment: Left
-PPIndentWidth:   -1
+PPIndentWidth: -1
 RawStringFormats:
- - Language:        Cpp
-   Delimiters:
-     - cc
-     - CC
-     - cpp
-     - Cpp
-     - CPP
-     - 'c++'
-     - 'C++'
-   CanonicalDelimiter: ''
-   BasedOnStyle:    google
- - Language:        TextProto
-   Delimiters:
-     - pb
-     - PB
-     - proto
-     - PROTO
-   EnclosingFunctions:
-     - EqualsProto
-     - EquivToProto
-     - PARSE_PARTIAL_TEXT_PROTO
-     - PARSE_TEST_PROTO
-     - PARSE_TEXT_PROTO
-     - ParseTextOrDie
-     - ParseTextProtoOrDie
-     - ParseTestProto
-     - ParsePartialTestProto
-   CanonicalDelimiter: pb
-   BasedOnStyle:    google
+  - Language: Cpp
+    Delimiters:
+      - cc
+      - CC
+      - cpp
+      - Cpp
+      - CPP
+      - 'c++'
+      - 'C++'
+    CanonicalDelimiter: ''
+    BasedOnStyle: google
+  - Language: TextProto
+    Delimiters:
+      - pb
+      - PB
+      - proto
+      - PROTO
+    EnclosingFunctions:
+      - EqualsProto
+      - EquivToProto
+      - PARSE_PARTIAL_TEXT_PROTO
+      - PARSE_TEST_PROTO
+      - PARSE_TEXT_PROTO
+      - ParseTextOrDie
+      - ParseTextProtoOrDie
+      - ParseTestProto
+      - ParsePartialTestProto
+    CanonicalDelimiter: pb
+    BasedOnStyle: google
 # 引用对齐
 ReferenceAlignment: Pointer
 # 允许重新排版注释
 ReflowComments: true
 # 允许排序#include
-SortIncludes:    CaseSensitive
+SortIncludes: CaseSensitive
 # 允许排序声明
 SortUsingDeclarations: true
 # 单独的定义块
@@ -271,13 +269,13 @@ SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: ControlStatements
 # 开圆括号之前添加一个空格
 SpaceBeforeParensOptions:
- AfterControlStatements: true
- AfterForeachMacros: true
- AfterFunctionDefinitionName: false
- AfterFunctionDeclarationName: false
- AfterIfMacros:   true
- AfterOverloadedOperator: false
- BeforeNonEmptyParentheses: false
+  AfterControlStatements: true
+  AfterForeachMacros: true
+  AfterFunctionDefinitionName: false
+  AfterFunctionDeclarationName: false
+  AfterIfMacros: true
+  AfterOverloadedOperator: false
+  BeforeNonEmptyParentheses: false
 # 在空的圆括号中添加空格
 SpaceInEmptyParentheses: false
 # 在基于冒号的范围循环之前 添加空格
@@ -285,7 +283,7 @@ SpaceBeforeRangeBasedForLoopColon: true
 # 在尾随的评论前添加的空格数(只适用于//)
 SpacesBeforeTrailingComments: 2
 # 在尖括号的<后和>前添加空格
-SpacesInAngles:  Never
+SpacesInAngles: Never
 # 在容器(ObjC和JavaScript的数组和字典等)字面量中添加空格
 SpacesInContainerLiterals: true
 # 在C风格类型转换的括号中添加空格
@@ -303,8 +301,8 @@ UseTab: Never
 DeriveLineEnding: false
 UseCRLF: false
 WhitespaceSensitiveMacros:
- - STRINGIZE
- - PP_STRINGIZE
- - BOOST_PP_STRINGIZE
- - NS_SWIFT_NAME
- - CF_SWIFT_NAME
+  - STRINGIZE
+  - PP_STRINGIZE
+  - BOOST_PP_STRINGIZE
+  - NS_SWIFT_NAME
+  - CF_SWIFT_NAME

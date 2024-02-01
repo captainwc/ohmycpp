@@ -33,8 +33,8 @@ public:
     }
 
     int size() {
-        std::unique_lock<std::mutex> lock(
-            m_mutex);  // 互斥信号变量加锁，防止m_queue被改变​ return m_queue.size();
+        std::unique_lock<std::mutex> lock(m_mutex);  // 互斥信号变量加锁，防止m_queue被改变​
+        return m_queue.size();
     }
 
     // 队列添加元素

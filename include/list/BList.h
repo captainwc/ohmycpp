@@ -1,18 +1,22 @@
 /**
  * Create by shuaikai 2024/01/08 21:39:46
  *
+ * Ref: https://www.cnblogs.com/wengle520/p/12492708.html
+ *
  * Copyright (c) shuaikai. All rights reserved.
  */
 
 #ifndef B_LIST_H
 #define B_LIST_H
 
+#include <string>
+
 #include "BLNode.h"
 
 template <typename T>
 class BList {
 private:
-    int _size;
+    int        _size;
     BLNode<T>* _head;
     BLNode<T>* _tail;
 
@@ -23,8 +27,8 @@ public:
 
     class Iterator;
 
-    Iterator& begin() const;
-    Iterator& end() const;
+    Iterator        begin() const;
+    Iterator        end() const;
     const Iterator& cbegin() const;
     const Iterator& cend() const;
 
@@ -41,7 +45,7 @@ public:
     void insert(BLNode<T>* pNode, T val);
 
     std::vector<BLNode<T>*> toVector() const;
-    std::string dump() const;
+    std::string             dump() const;
 
     void print() const {
         std::cout << this->dump() << std::endl;
@@ -59,7 +63,7 @@ public:
         return _size;
     }
 
-    BLNode<T>* front() const {
+    BLNode<T>& front() const {
         return _head;
     }
 
@@ -69,10 +73,10 @@ public:
 };
 
 //==------------------------ Iterator --------------------------==//
+
 template <typename T>
 class BList<T>::Iterator {
 public:
-    // 定义一些别名方便复制粘贴
     using iterator_category = std::forward_iterator_tag;
     using difference_type = std::ptrdiff_t;
     using value_type = BLNode<T>;        // 迭代器指向的类型
@@ -82,19 +86,38 @@ public:
     Iterator() = default;
     Iterator(pointer);
 
+    bool isNull() const {
+        return curr_ == nullptr;
+    }
+
     Iterator& operator=(const Iterator&);
+
     bool operator==(const Iterator&) const;
     bool operator!=(const Iterator&) const;
+    bool operator>(const Iterator&) const;
+    bool operator<(const Iterator&) const;
+    bool operator>=(const Iterator&) const;
+    bool operator<=(const Iterator&) const;
 
     Iterator& operator++();
-    Iterator operator++(int);
+    Iterator  operator++(int);
     Iterator& operator--();
-    Iterator operator--(int);
+    Iterator  operator--(int);
 
-    friend Iterator& operator+(const Iterator& a, int b);
-    friend Iterator& operator-(const Iterator& a, int b);
+    Iterator& operator+(int);
+    Iterator& operator-(int);
+    int       operator-(const Iterator&) const;
 
     value_type& operator*();
+    pointer     operator->();
+
+    // TODO 友元模板重载，到底应该怎么写？
+    // friend typename BList<T>::Iterator& operator+(const Iterator& a, int b);
+    // friend Iterator& operator-(const Iterator& a, int b);
+    // friend Iterator& operator+(int a, const Iterator& b);
+    // friend Iterator& operator-(int a, const Iterator& b);
+    // friend Iterator& operator+(const Iterator& a, int b);
+    // friend Iterator& operator-(const Iterator& a, int b);
 
 private:
     pointer curr_;
@@ -142,6 +165,9 @@ void BList<T>::push_back(T val) {
 
 template <typename T>
 BLNode<T>* BList<T>::pop_front() {
+    if (empty()) {
+        return nullptr;
+    }
     auto pNode = _head->next;
     _head->next = pNode->next;
     pNode->next->prev = _head;
@@ -153,6 +179,9 @@ BLNode<T>* BList<T>::pop_front() {
 
 template <typename T>
 BLNode<T>* BList<T>::pop_back() {
+    if (empty()) {
+        return nullptr;
+    }
     auto pNode = _tail;
     _tail = _tail->prev;
     _tail->next = nullptr;
@@ -227,7 +256,7 @@ std::vector<BLNode<T>*> BList<T>::toVector() const {
 
 template <typename T>
 std::string BList<T>::dump() const {
-    auto p = _head->next;
+    auto        p = _head->next;
     std::string str = "[";
     while (p->next != nullptr) {
         str.append(std::to_string(p->val)).append(", ");
@@ -240,7 +269,7 @@ template <typename T>
 BLNode<T>& BList<T>::operator[](int idx) {
     if (idx < 0)
         throw std::out_of_range("idx shouldn't be negative!");
-    int cnt = 0;
+    int  cnt = 0;
     auto p = _head->next;
     while (cnt < idx && p != nullptr) {
         cnt++;
@@ -274,6 +303,42 @@ bool BList<T>::Iterator::operator!=(const Iterator& it) const {
 }
 
 template <typename T>
+bool BList<T>::Iterator::operator>(const Iterator& it) const {
+    auto p = it.curr_->next;
+    while (p != nullptr) {
+        if (p == this->curr_) {
+            return true;
+        }
+        p = p->next;
+    }
+    return false;
+}
+
+template <typename T>
+bool BList<T>::Iterator::operator<(const Iterator& it) const {
+    if (!isNull()) {
+        auto p = this->curr_->next;
+        while (p != nullptr) {
+            if (p == it.curr_) {
+                return true;
+            }
+            p = p->next;
+        }
+    }
+    return false;
+}
+
+template <typename T>
+bool BList<T>::Iterator::operator>=(const Iterator& it) const {
+    return *this > it || *this == it;
+}
+
+template <typename T>
+bool BList<T>::Iterator::operator<=(const Iterator& it) const {
+    return *this < it || *this == it;
+}
+
+template <typename T>
 typename BList<T>::Iterator& BList<T>::Iterator::operator++() {
     curr_ = curr_->next;
     return *this;
@@ -287,17 +352,101 @@ typename BList<T>::Iterator BList<T>::Iterator::operator++(int) {
 }
 
 template <typename T>
+typename BList<T>::Iterator& BList<T>::Iterator::operator--() {
+    curr_ = curr_->prev;
+    return *this;
+}
+
+template <typename T>
+typename BList<T>::Iterator BList<T>::Iterator::operator--(int) {
+    BList<T>::Iterator tmp = *this;
+    curr_ = curr_->prev;
+    return tmp;
+}
+
+template <typename T>
+typename BList<T>::Iterator& BList<T>::Iterator::operator+(int a) {
+    while (a--) {
+        curr_ = curr_->next;
+    }
+    return *this;
+}
+
+template <typename T>
+typename BList<T>::Iterator& BList<T>::Iterator::operator-(int a) {
+    while (a--) {
+        curr_ = curr_->prev;
+    }
+    return *this;
+}
+
+template <typename T>
+int BList<T>::Iterator::operator-(const typename BList<T>::Iterator& it) const {
+    int cnt = 0;
+    if (*this < it) {
+        return it - *this;
+    }
+    auto p = it.curr_;
+    while (p != curr_) {
+        cnt++;
+        p = p->next;
+    }
+    return cnt;
+}
+
+template <typename T>
+typename BList<T>::Iterator& operator+(int a, const typename BList<T>::Iterator& b) {
+    auto tmp = b;
+    while (a--) {
+        tmp++;
+    }
+    return tmp;
+}
+
+template <typename T>
+typename BList<T>::Iterator& operator-(int a, const typename BList<T>::Iterator& b) {
+    auto tmp = b;
+    while (a--) {
+        tmp--;
+    }
+    return tmp;
+}
+
+template <typename T>
+typename BList<T>::Iterator& operator+(const typename BList<T>::Iterator& a, int b) {
+    auto tmp = a;
+    while (b--) {
+        tmp++;
+    }
+    return tmp;
+}
+
+template <typename T>
+typename BList<T>::Iterator& operator-(const typename BList<T>::Iterator& a, int b) {
+    auto tmp = a;
+    while (b--) {
+        tmp--;
+    }
+    return tmp;
+}
+
+template <typename T>
 typename BList<T>::Iterator::value_type& BList<T>::Iterator::operator*() {
     return *curr_;
 }
 
 template <typename T>
-typename BList<T>::Iterator& BList<T>::begin() const {
+typename BList<T>::Iterator::pointer BList<T>::Iterator::operator->() {
+    return curr_;
+}
+
+template <typename T>
+typename BList<T>::Iterator BList<T>::begin() const {
     return Iterator(front());
 }
 
 template <typename T>
-typename BList<T>::Iterator& BList<T>::end() const {
+typename BList<T>::Iterator BList<T>::end() const {
     return Iterator(back()->next);
 }
 

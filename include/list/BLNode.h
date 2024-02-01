@@ -12,7 +12,7 @@
 
 template <typename T>
 struct BLNode {
-    T val;
+    T       val;
     BLNode* next;
     BLNode* prev;
 
@@ -50,7 +50,7 @@ struct BLNode {
         return a.val <= b.val;
     }
 
-    BLNode& operator=(const BLNode& other) {
+    BLNode<T>& operator=(const BLNode<T>& other) {
         if (this != &other) {
             this->val = other.val;
             this->next = other.next;

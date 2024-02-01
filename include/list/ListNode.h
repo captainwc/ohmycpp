@@ -82,6 +82,7 @@ public:
     Iterator operator--(int);
 
     value_type& operator*();
+    pointer operator->();
 
 private:
     pointer curr_;

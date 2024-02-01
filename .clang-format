@@ -1,6 +1,8 @@
 #基于那个配置文件
 BasedOnStyle: Google
 Language: Cpp
+# 标准: Cpp03, Cpp11, Auto
+Standard: c++20
 ColumnLimit: 120
 BraceWrapping:
   # case标签后面
@@ -292,8 +294,6 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 # 在方括号的[后和]前添加空格，lamda表达式和未指明大小的数组的声明不受影响
 SpacesInSquareBrackets: false
-# 标准: Cpp03, Cpp11, Auto
-Standard: c++14
 # tab宽度
 TabWidth: 4
 # 使用tab字符: Never, ForIndentation, ForContinuationAndIndentation, Always

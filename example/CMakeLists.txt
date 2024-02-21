@@ -1,12 +1,12 @@
 file(GLOB SOURCES "*.cpp")
 
-set(TARGETS "[Tests]: ")
+set(EXAMPLES "[Examples]: ")
 
 foreach (file ${SOURCES})
     get_filename_component(target ${file} NAME_WE)
     add_executable(${target} ${file})
     target_include_directories(${target} PUBLIC ${INCLUDE_DIR})
-    set(TARGETS ${TARGETS} ${target})
+    set(EXAMPLES ${EXAMPLES} ${target})
 endforeach ()
 
-message(STATUS ${TARGETS})
+message(STATUS ${EXAMPLES})

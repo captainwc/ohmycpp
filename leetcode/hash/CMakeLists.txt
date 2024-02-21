@@ -1,6 +1,6 @@
 file(GLOB SOURCES "*.cpp")
 
-set(TARGETS "[Tests]: ")
+set(TARGETS "[Hash]: ")
 
 foreach (file ${SOURCES})
     get_filename_component(target ${file} NAME_WE)

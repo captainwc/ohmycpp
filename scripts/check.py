@@ -1,7 +1,6 @@
 import os
 import argparse
 import subprocess
-import spdlog
 
 
 def check_memleak(target):
@@ -15,12 +14,12 @@ def check_memleak(target):
         "--verbose",
         root + "/build/bin/" + target,
     ]
-    spdlog.info(target)
     subprocess.run(cmd)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("target", help="target to check", default="spdlogEg", nargs="?")
+    parser.add_argument("target", help="target to check",
+                        default="spdlogEg", nargs="?")
     args = parser.parse_args()
     check_memleak(args.target)

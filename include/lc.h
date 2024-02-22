@@ -16,8 +16,7 @@ struct ListNode {
     }
 
     ~ListNode() {
-        std::cout << "Destory ListNode" << std::endl;
-        delete next;
+        // delete next;
     }
 };
 

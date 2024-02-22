@@ -21,6 +21,7 @@ template <typename T>
 concept Map = std::same_as<T, std::map<typename T::key_type, typename T::mapped_type>>
               || std::same_as<T, std::unordered_map<typename T::key_type, typename T::mapped_type>>;
 
+//  打印线性容器
 template <LinerList T>
 void print(T list, const std::string& str = "") {
     if (!str.empty()) {
@@ -32,6 +33,7 @@ void print(T list, const std::string& str = "") {
     std::cout << std::endl;
 }
 
+// 打印关联容器
 template <Map T>
 void print(T map, const std::string& str = "") {
     if (!str.empty()) {
@@ -43,6 +45,7 @@ void print(T map, const std::string& str = "") {
     std::cout << std::endl;
 }
 
+// 分割字符串
 std::vector<std::string> split(const std::string& str, char delim) {
     std::stringstream        ss(str);
     std::vector<std::string> tokens;
@@ -53,6 +56,7 @@ std::vector<std::string> split(const std::string& str, char delim) {
     return tokens;
 }
 
+// 获取文件的basename，可以指定是否带有拓展名(With Extension)
 std::string getFileName(const std::string& path, bool we) {
     std::filesystem::path p(path);
     if (we) {

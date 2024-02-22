@@ -1,3 +1,15 @@
+/**
+ 一个对spdlog的封装，可直接获得一个名字为当前文件加函数名的logger
+
+ 定义了一个map，存储所有的logger，通过文件名和日志名作为键，来查找存在的logger
+ 如果存在则返回，否则新建一个，存储后返回
+ 这样做是为了防止重名logger的出现
+
+ @usage: LOGGER \ ERROR \ CONSOLE
+ @auther: shuaikai
+ @date: 2024/02/22
+*/
+
 #ifndef LOG_H
 #define LOG_H
 
@@ -32,8 +44,9 @@ auto getLogger(const std::string& name, const std::string& file) {
     return logger;
 }
 
-#define LOGGER  getLogger(getFileName(__FILE__, false), LOG)
-#define ERROR   getLogger(getFileName(__FILE__, false), LOG_ERROR)
-#define CONSOLE getLogger(getFileName(__FILE__, false), "")
+#define GET_LOGGER_NAME getFileName(__FILE__, false) + "::" + __FUNCTION__
+#define LOGGER          getLogger(GET_LOGGER_NAME, LOG)
+#define ERROR           getLogger(GET_LOGGER_NAME, LOG_ERROR)
+#define CONSOLE         getLogger(GET_LOGGER_NAME, "")
 
 #endif  // LOG_H

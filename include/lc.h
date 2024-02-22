@@ -16,7 +16,7 @@ struct ListNode {
     }
 
     ~ListNode() {
-        // delete next;
+        delete next;
     }
 };
 

@@ -12,7 +12,7 @@ struct ListNode {
     ListNode *prev;
     ListNode *next;
 
-    explicit ListNode(int v = 0, ListNode *n = nullptr, ListNode *p = nullptr) : val(v), next(n), prev(p) {
+    explicit ListNode(int v = 0, ListNode *n = nullptr, ListNode *p = nullptr) : val(v), prev(p), next(n) {
     }
 
     ~ListNode() {

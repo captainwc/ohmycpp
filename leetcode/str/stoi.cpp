@@ -11,17 +11,17 @@
 
 #include <unordered_map>
 #include <vector>
+
 #include "lc.h"
 
 using namespace std;
 
 class Solution {
 public:
-    std::unordered_map<std::string, std::vector<std::string>> state_table{
-        {}
-    };
+    std::unordered_map<std::string, std::vector<std::string>> state_table{{}};
 
     int myAtoi(string s) {
+        return 0;
     }
 };
 

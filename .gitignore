@@ -5,4 +5,5 @@ bashbuild/
 build/
 
 include/test
+include/spdlog
 quicklc/

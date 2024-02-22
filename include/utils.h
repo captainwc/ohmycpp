@@ -1,6 +1,7 @@
 #ifndef MODERNCPP_UTILS_H
 #define MODERNCPP_UTILS_H
 
+#include <filesystem>
 #include <iostream>
 #include <list>
 #include <map>
@@ -50,6 +51,14 @@ std::vector<std::string> split(const std::string& str, char delim) {
         tokens.emplace_back(token);
     }
     return tokens;
+}
+
+std::string getFileName(const std::string& path, bool we) {
+    std::filesystem::path p(path);
+    if (we) {
+        return p.filename().string();
+    }
+    return p.stem().string();
 }
 
 #endif  // MODERNCPP_UTILS_H

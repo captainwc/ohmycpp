@@ -17,10 +17,32 @@ concept LinerList =
     || std::same_as<T, std::set<typename T::value_type>> || std::same_as<T, std::unordered_set<typename T::value_type>>;
 
 template <typename T>
-concept Map = std::same_as<T, std::map<typename T::key_type, typename T::value_type>>
-              || std::same_as<T, std::unordered_map<typename T::key_type, typename T::value_type>>;
+concept Map = std::same_as<T, std::map<typename T::key_type, typename T::mapped_type>>
+              || std::same_as<T, std::unordered_map<typename T::key_type, typename T::mapped_type>>;
 
-std::vector<std::string> split(const std::string &str, char delim) {
+template <LinerList T>
+void print(T list, const std::string& str = "") {
+    if (!str.empty()) {
+        std::cout << str << " ";
+    }
+    for (auto x : list) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+}
+
+template <Map T>
+void print(T map, const std::string& str = "") {
+    if (!str.empty()) {
+        std::cout << str << " ";
+    }
+    for (auto entry : map) {
+        std::cout << "<" << entry.first << "," << entry.second << "> ";
+    }
+    std::cout << std::endl;
+}
+
+std::vector<std::string> split(const std::string& str, char delim) {
     std::stringstream        ss(str);
     std::vector<std::string> tokens;
     std::string              token;

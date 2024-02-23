@@ -10,6 +10,7 @@
 #include <cstdint>
 
 #include "lc.h"
+#include "print_utils.h"
 
 using namespace std;
 #define int int32_t

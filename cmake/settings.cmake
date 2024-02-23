@@ -19,7 +19,7 @@ endif()
 # CXX
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall")
 
-option(WERROR ON)
+option(WERROR "if -Werror" ON)
 if(WERROR)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 endif()

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "lc.h"
 
 int main() {

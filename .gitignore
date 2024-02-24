@@ -1,7 +1,7 @@
 .cache/
 .idea/
 .vscode/
-bashbuild/
+manualy_build/
 build/
 
 include/test

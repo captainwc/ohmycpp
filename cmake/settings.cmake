@@ -6,7 +6,7 @@ set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
 # Project Module
 option(BUILD_SRC "Add leetcode SRC target" ON)
-option(BUILD_TEST "Build Example and Test" OFF)
+option(BUILD_TEST "Build Example and Test" ON)
 
 if(BUILD_SRC)
     add_subdirectory(leetcode)

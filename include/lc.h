@@ -1,11 +1,11 @@
 #ifndef MODERNCPP_LC_H
 #define MODERNCPP_LC_H
 
-#include <algorithm>
-#include <memory>
-#include <string>
+#include <bits/stdc++.h>
 
-#include "string_utils.h"
+#include "utils.h"
+
+using namespace std;
 
 struct ListNode {
     int       val;

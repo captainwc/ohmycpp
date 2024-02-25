@@ -10,6 +10,6 @@ int main() {
     auto matrix2 = get_vector_2d(5, 5);
     show_graphic(matrix1, PRINT_INT);
     std::cout << std::endl;
-    show_graphic(matrix2, PRINT_CHAR);
+    show_graphic(matrix2, PRINT_CHAR_PIVOT);
     return 0;
 }

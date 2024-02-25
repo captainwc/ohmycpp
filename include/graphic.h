@@ -1,4 +1,6 @@
 //
+// 用二维矩阵模仿图片。类似leetcode中的岛屿的题目
+//
 // Created by shuaikai on 24-2-24.
 //
 
@@ -9,14 +11,35 @@
 #include <iostream>
 #include <vector>
 
+// 由于获取随机数的默认范围是 (0, 100)，因此此处设置中位数50作为划分
+const int pivot = 50;
+
+// 原样输出数组中的数字
 const auto PRINT_INT = [](const int x) {
     printf("%2d ", x);
 };
 
-const auto PRINT_CHAR = [](const int x) {
-    printf("%c ", x < 50 ? '_' : '$');
+// 将数字数组转换为字符图形
+const auto PRINT_CHAR_PIVOT = [](const int x) {
+    printf("%c ", x < pivot ? '_' : '$');
+};  
+
+// 针对01数组
+const auto PRINT_CHAR_01 = [](const int x) {
+    char elem = x == 0 ? '_' : (x == 1 ? '$' : '*');
+    printf("%c ", elem);
 };
 
+// 将随机数数组转换为01
+const auto CG_GRAPHIC_01 = [](std::vector<std::vector<int>>& sea) {
+    std::for_each(sea.begin(), sea.end(), [](auto& vc) {
+        std::transform(vc.begin(), vc.end(), vc.begin(), [](int x) {
+            return x < pivot ? 0 : 1;
+        });
+    });
+};
+
+// 打印二维数组
 void show_graphic(const std::vector<std::vector<int>>&  graphic,
                   const std::function<void(const int)>& printer = PRINT_INT) {
     auto col_num = graphic[0].size();

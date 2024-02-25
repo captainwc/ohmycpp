@@ -1,3 +1,5 @@
 add_subdirectory(hash)
 add_subdirectory(linerlist)
 add_subdirectory(str)
+add_subdirectory(search)
+add_subdirectory(solutions)

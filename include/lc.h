@@ -75,7 +75,7 @@ std::vector<std::string> serializeTreeByInorder(TreeNode *node) {
 }
 
 /**
- * @brief 中序顺序创建二叉树。创建树就跟遍历树一样，用遍历的思想和模板去遍历数组就好了
+ * @brief 层次遍历顺序创建二叉树。创建树就跟遍历树一样，用遍历的思想和模板去遍历数组就好了
  * @example 3,9,20,null,null,15,7
  */
 std::unique_ptr<TreeNode> deSerializeTreeByLevelOrder(std::string str, std::string null = "null", char delim = ',') {

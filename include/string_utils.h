@@ -18,7 +18,7 @@ std::vector<std::string> split(const std::string& str, char delim) {
 
 // --- 格式化字符串，展开参数包最后一步
 template <typename T>
-void format_string_helper(std::stringstream& ss, const std::string& format, T&& arg) {
+void _format_string_helper(std::stringstream& ss, const std::string& format, T&& arg) {
     static std::string placeholder = "{}";
 
     auto pos = format.find(placeholder);
@@ -29,13 +29,13 @@ void format_string_helper(std::stringstream& ss, const std::string& format, T&& 
 
 // --- 格式化字符串， 递归展开参数包
 template <typename T, typename... Args>
-static void format_string_helper(std::stringstream& ss, const std::string& format, T&& arg, Args&&... args) {
+static void _format_string_helper(std::stringstream& ss, const std::string& format, T&& arg, Args&&... args) {
     static std::string placeholder = "{}";
 
     auto pos = format.find(placeholder);
     if (pos != std::string::npos) {
         ss << format.substr(0, pos) << arg;
-        format_string_helper(ss, format.substr(pos + placeholder.size()), std::forward<Args>(args)...);
+        _format_string_helper(ss, format.substr(pos + placeholder.size()), std::forward<Args>(args)...);
     }
 }
 
@@ -43,7 +43,7 @@ static void format_string_helper(std::stringstream& ss, const std::string& forma
 template <typename... Args>
 std::string format_string(const std::string& format, Args&&... args) noexcept {
     std::stringstream ss;
-    format_string_helper(ss, format, std::forward<Args>(args)...);
+    _format_string_helper(ss, format, std::forward<Args>(args)...);
     return ss.str();
 }
 

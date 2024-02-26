@@ -7,8 +7,10 @@
 #ifndef MODERNCPP_GRAPHIC_H
 #define MODERNCPP_GRAPHIC_H
 
+#include <fstream>
 #include <functional>
 #include <iostream>
+#include <string>
 #include <vector>
 
 // 由于获取随机数的默认范围是 (0, 100)，因此此处设置中位数50作为划分
@@ -22,7 +24,7 @@ const auto PRINT_INT = [](const int x) {
 // 将数字数组转换为字符图形
 const auto PRINT_CHAR_PIVOT = [](const int x) {
     printf("%c ", x < pivot ? '_' : '$');
-};  
+};
 
 // 针对01数组
 const auto PRINT_CHAR_01 = [](const int x) {
@@ -50,6 +52,69 @@ void show_graphic(const std::vector<std::vector<int>>&  graphic,
         }
         putchar('\n');
     }
+}
+
+// 可视化一维数组为dot文件
+template <typename T>
+void visualize1DArray(const std::vector<T>& array, const std::string& filename) {
+    std::ofstream file(filename);
+    file << "digraph G {\n";
+
+    for (size_t i = 0; i < array.size(); ++i) {
+        file << "  node" << i << " [label=\"" << array[i] << "\"];\n";
+        if (i > 0) {
+            file << "  node" << (i - 1) << " -> node" << i << ";\n";
+        }
+    }
+
+    file << "}";
+    file.close();
+}
+
+// 可视化二维数组为dot文件
+template <typename T>
+void visualize2DArray(const std::vector<std::vector<T>>& array, const std::string& filename) {
+    std::ofstream file(filename);
+    file << "digraph G {\n";
+
+    for (size_t i = 0; i < array.size(); ++i) {
+        for (size_t j = 0; j < array[i].size(); ++j) {
+            file << "  node" << i << "_" << j << " [label=\"" << array[i][j] << "\"];\n";
+            if (j > 0) {
+                file << "  node" << i << "_" << (j - 1) << " -> node" << i << "_" << j << ";\n";
+            }
+            if (i > 0) {
+                file << "  node" << (i - 1) << "_" << j << " -> node" << i << "_" << j << ";\n";
+            }
+        }
+    }
+
+    file << "}";
+    file.close();
+}
+
+// 可视化一维数组为png文件
+template <typename T>
+void visualize1DArrayPNG(const std::vector<T>& array, const std::string& filename) {
+    std::string dotFilename = filename + ".dot";
+    visualize1DArray(array, dotFilename);
+
+    std::string command = "dot -Tpng " + dotFilename + " -o " + filename;
+    system(command.c_str());
+
+    std::remove(dotFilename.c_str());
+}
+
+// 可视化二维数组为png文件
+template <typename T>
+void visualize2DArrayPNG(const std::vector<std::vector<T>>& array, const std::string& filename) {
+    std::string dotFilename = filename + ".dot";
+    visualize2DArray(array, dotFilename);
+
+    std::string command = "dot -Tpng " + dotFilename + " -o " + filename;
+    system(command.c_str());
+
+    std::remove(dotFilename.c_str());
 }
 
 #endif  // MODERNCPP_GRAPHIC_H

@@ -6,6 +6,7 @@
 #include "utils.h"
 
 int main() {
+    // 字符串输出
     auto matrix1 = get_vector_2d(5, 30);
     auto matrix2 = get_vector_2d(5, 5);
     show_graphic(matrix1, PRINT_INT);

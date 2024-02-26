@@ -6,3 +6,5 @@ build/
 
 include/test
 include/spdlog
+
+*.png

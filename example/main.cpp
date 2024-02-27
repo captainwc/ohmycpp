@@ -1,6 +1,37 @@
+#include <memory>
+#include <queue>
+#include <vector>
+
 #include "print_utils.h"
 #include "string_utils.h"
 
+class Main {
+public:
+    int* p;
+    int  a = 888;
+    int  b;
+
+    Main() {
+        print("construct");
+        p    = new int(5);
+        p[0] = 999;
+        b    = 777;
+    }
+
+    ~Main() {
+        delete p;
+        print("destory");
+    }
+};
+
 int main() {
-    print(format_string("hello the {} world, {} is your {} {} {}!", "awesome", "he", "truly"));
+    std::queue<Main*>  q;
+    std::vector<Main*> vc;
+    if (true) {
+        Main* m = new Main();
+        vc.push_back(m);
+        q.push(m);
+    }
+    print("---");
+    delete vc[0];
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 #include "db/redis.h"
 
@@ -10,6 +11,7 @@ int main() {
     rd.lpop("list1");
     rd.lpush("list1", "winter");
 
-    rd.execute("LRANGE list1 0 -1");
-    std::cout << rd.getReply() << std::endl;
+    std::unique_ptr<Db> p = std::make_unique<RedisConnector>();
+    p->execute("LRANGE list1 0 -1");
+    std::cout << p->getReply() << std::endl;
 }

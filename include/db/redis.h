@@ -6,9 +6,11 @@
 #include <iostream>
 #include <string>
 
+#include "db.h"
+
 #define C_LOG 1
 
-class RedisConnector {
+class RedisConnector : public Db {
 public:
     // clang-format off
     RedisConnector() : RedisConnector(6379) {}

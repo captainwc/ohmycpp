@@ -1,7 +1,7 @@
-# Leetcode Project
+# Modern Cpp Project
 
 ## Brief
-This is a LeetCode project written in CPP and managed by CMake.
+This is a Modern Cpp project managed by CMake.
 
 I plan to implement some data structures, and save Solutions I think make sense here.
 
@@ -23,7 +23,7 @@ They are:
 Then you can clone build and run like:
 
 ```bash
-git clone git@github.com:captainwc/leetcode-cpp.git
+git clone git@github.com:captainwc/ohmycpp.git
 mkdir build
 cd build
 # if you want to build my Solutions as well, set the -DBUILD_SRC=ON

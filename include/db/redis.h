@@ -14,16 +14,16 @@ class RedisConnector : public Db {
 public:
     // clang-format off
     RedisConnector() : RedisConnector(6379) {}
-    RedisConnector(int port) : RedisConnector("localhost", port) {}
+    explicit RedisConnector(int port) : RedisConnector("localhost", port) {}
     RedisConnector(const std::string& hostname, int port);
-    ~RedisConnector();
+    ~RedisConnector() override;
     // clang-format on
 
-    void execute(const std::string& cmd);
+    void execute(const std::string& command) override;
     void lpush(const std::string& listname, const std::string& value);
     void lpop(const std::string& listname);
 
-    const std::string getReply();
+    const std::string getReply() override;
 
 private:
     const std::string hostname_;
@@ -57,7 +57,7 @@ RedisConnector::~RedisConnector() {
 }
 
 void RedisConnector::execute(const std::string& command) {
-    redisReply* reply = static_cast<redisReply*>(redisCommand(context_, command.c_str()));
+    auto reply = static_cast<redisReply*>(redisCommand(context_, command.c_str()));
     if (reply == nullptr) {
 #ifdef C_LOG
         std::cerr << "-- command exectuation failed!" << std::endl;

@@ -5,6 +5,6 @@ manualy_build/
 build/
 
 include/test
-include/spdlog
+# include/log/spdlog
 
 *.png

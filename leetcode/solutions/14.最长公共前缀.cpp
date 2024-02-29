@@ -4,7 +4,7 @@
  * [14] 最长公共前缀
  */
 
-#include "lc.h"
+#include "leetcode/lc.h"
 
 // @lc code=start
 class Solution {

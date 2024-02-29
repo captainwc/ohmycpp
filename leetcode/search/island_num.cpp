@@ -2,8 +2,8 @@
 // Created by shuaikai on 24-2-25.
 //
 
-#include "graphic.h"
-#include "utils.h"
+#include "graphic/graphic.h"
+#include "utils/utils.h"
 
 using GRAPHIC = std::vector<std::vector<int>>;
 

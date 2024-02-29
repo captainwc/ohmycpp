@@ -1,5 +1,4 @@
-#include "lc.h"
-#include "tree_node.h"
+#include "leetcode/lc.h"
 
 int main() {
     // list

@@ -22,7 +22,7 @@
 #include "spdlog/logger.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
-#include "utils.h"
+#include "utils/utils.h"
 
 const std::string LOG       = WORKSPACE + "log/log.log";
 const std::string LOG_ERROR = WORKSPACE + "log/error.log";

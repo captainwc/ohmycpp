@@ -4,7 +4,7 @@
  * [977] 有序数组的平方
  */
 
-#include "lc.h"
+#include "leetcode/lc.h"
 
 // @lc code=start
 class Solution {

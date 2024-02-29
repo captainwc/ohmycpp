@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "string_utils.h"
+#include "utils/string_utils.h"
 
 const std::string NULL_NODE = "null";
 const char        DELIM     = ',';

@@ -17,8 +17,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "lc.h"
-#include "log.h"
+#include "leetcode/lc.h"
+#include "log/log.h"
 
 using namespace std;
 

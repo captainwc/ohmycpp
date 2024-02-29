@@ -1,6 +1,8 @@
 #ifndef DB_CONNECTOR_H
 #define DB_CONNECTOR_H
 
+#include <string>
+
 class Db {
 public:
     /**
@@ -15,8 +17,7 @@ public:
      */
     virtual const std::string getReply() = 0;
 
-    virtual ~Db() {
-    }
+    virtual ~Db() = default;
 };
 
 #endif  // DB_CONNECTOR_H

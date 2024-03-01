@@ -1,5 +1,5 @@
-#ifndef MODERNCPP_UTILS_H
-#define MODERNCPP_UTILS_H
+#ifndef OHMYCPP_UTILS_H
+#define OHMYCPP_UTILS_H
 
 #include <filesystem>
 #include <random>
@@ -41,4 +41,4 @@ auto get_vector_2d(int x, int y, int low = 0, int up = 100) {
     return ret;
 }
 
-#endif  // MODERNCPP_UTILS_H
+#endif  // OHMYCPP_UTILS_H

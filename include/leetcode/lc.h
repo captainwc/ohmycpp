@@ -1,5 +1,5 @@
-#ifndef MODERNCPP_LC_H
-#define MODERNCPP_LC_H
+#ifndef OHMYCPP_LC_H
+#define OHMYCPP_LC_H
 
 #include <bits/stdc++.h>
 
@@ -9,4 +9,4 @@
 
 using namespace std;
 
-#endif  // MODERNCPP_LC_H
+#endif  // OHMYCPP_LC_H

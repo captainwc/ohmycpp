@@ -7,8 +7,7 @@
 #include <string>
 
 #include "db.h"
-
-#define C_LOG 1
+#include "log/log.h"
 
 class RedisConnector : public Db {
 public:
@@ -37,31 +36,23 @@ RedisConnector::RedisConnector(const std::string& hostname, int port)
     : hostname_(hostname), port_(port), reply_(nullptr) {
     auto p = redisConnect(hostname.c_str(), port);
     if (p == nullptr || p->err) {
-#ifdef C_LOG
-        std::cerr << "-- connect to redis failed!" << std::endl;
-#endif
+        CONSOLE->error("connect to redis failed!");
         context_ = nullptr;
     }
     context_ = p;
-#ifdef C_LOG
-    std::cout << "-- connect to redis successfully!" << std::endl;
-#endif
+    CONSOLE->info("connect to redis successfully!");
 }
 
 RedisConnector::~RedisConnector() {
     redisFree(context_);
     delete reply_;
-#ifdef C_LOG
-    std::cout << "-- unconnect to redis!" << std::endl;
-#endif
+    CONSOLE->info("unconnect to redis!");
 }
 
 void RedisConnector::execute(const std::string& command) {
     auto reply = static_cast<redisReply*>(redisCommand(context_, command.c_str()));
     if (reply == nullptr) {
-#ifdef C_LOG
-        std::cerr << "-- command exectuation failed!" << std::endl;
-#endif
+        CONSOLE->error("command exectuation failed!");
     }
     reply_ = reply;
 }
@@ -86,11 +77,11 @@ const std::string RedisConnector::getReply() {
 }
 
 void RedisConnector::lpush(const std::string& listname, const std::string& value) {
-    execute("LPUSH " + std::move(listname) + " " + std::move(value));
+    execute("LPUSH " + listname + " " + value);
 }
 
 void RedisConnector::lpop(const std::string& listname) {
-    execute("LPOP " + std::move(listname));
+    execute("LPOP " + listname);
 }
 
 #endif  // REDIS_WRAPPER_H

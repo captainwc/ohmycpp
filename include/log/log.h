@@ -36,6 +36,7 @@ auto getLogger(const std::string& name, const std::string& file) {
     std::shared_ptr<spdlog::logger> logger;
     if (file.empty()) {
         logger = spdlog::stdout_color_mt(name);
+        logger->set_pattern("[%H:%M:%S] [%n] [%^%l%$] %v");
     } else {
         std::filesystem::path log_file(file);
         logger = spdlog::basic_logger_mt(name + "_" + log_file.stem().string(), file);

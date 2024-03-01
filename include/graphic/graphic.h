@@ -4,8 +4,8 @@
 // Created by shuaikai on 24-2-24.
 //
 
-#ifndef MODERNCPP_GRAPHIC_H
-#define MODERNCPP_GRAPHIC_H
+#ifndef OHMYCPP_GRAPHIC_H
+#define OHMYCPP_GRAPHIC_H
 
 #include <fstream>
 #include <functional>
@@ -54,4 +54,4 @@ void show_graphic(const std::vector<std::vector<int>>&  graphic,
     }
 }
 
-#endif  // MODERNCPP_GRAPHIC_H
+#endif  // OHMYCPP_GRAPHIC_H

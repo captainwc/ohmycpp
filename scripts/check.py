@@ -20,6 +20,6 @@ def check_memleak(target):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("target", help="target to check",
-                        default="spdlogEg", nargs="?")
+                        default="lru", nargs="?")
     args = parser.parse_args()
     check_memleak(args.target)

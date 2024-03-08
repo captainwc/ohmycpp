@@ -7,4 +7,6 @@ build/
 include/test
 # include/log/spdlog
 
+include/tinystl
+
 *.png

@@ -1,7 +1,5 @@
-find_library(GTEST gtest)
-
-if(GTEST)
-    message(DEBUG <GTEST>:${GTEST})
-endif()
-
-find_library(PTHREAD pthread REQUIRED)
+if (${SYSTEM} STREQUAL "unix")
+    find_library(LIB_GTEST gtest REQUIRED)
+    find_library(LIB_PTHREAD pthread REQUIRED)
+    find_library(LIB_REDIS hiredis REQUIRED)
+endif ()

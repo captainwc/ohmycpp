@@ -1,12 +1,18 @@
-file(GLOB SOURCES "*.cpp")
+set(TARGETS "[Examples]: ")
 
-set(EXAMPLES "[Examples]: ")
+set(COMMON_TEST main.cpp)
 
-foreach (file ${SOURCES})
-    get_filename_component(target ${file} NAME_WE)
-    add_executable(${target} ${file})
+foreach (test_file ${COMMON_TEST})
+    STRING(REGEX REPLACE ".cpp" "" target ${test_file})
+    add_executable(${target} ${test_file})
     target_include_directories(${target} PUBLIC ${INCLUDE_DIR})
-    set(EXAMPLES "${EXAMPLES} ${target}")
+    set(TARGETS "${TARGETS} ${target}")
 endforeach ()
 
-message(STATUS --${EXAMPLES})
+if (${SYSTEM} STREQUAL "unix")
+    add_executable(spdlogEg spdlogEg.cpp)
+    target_include_directories(spdlogEg.cpp PUBLIC ${INCLUDE_DIR})
+    set(TARGETS "${TARGETS} spdlogEg")
+endif ()
+
+message(STATUS --${TARGETS})

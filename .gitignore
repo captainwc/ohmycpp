@@ -5,8 +5,8 @@ manualy_build/
 build/
 
 include/test
-# include/log/spdlog
-
 include/tinystl
+
+log/
 
 *.png

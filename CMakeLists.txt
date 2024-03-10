@@ -3,14 +3,12 @@ project(ohmycpp)
 
 set(CMAKE_CXX_STANDARD 20)
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     set(SYSTEM "win")
-else ()
+else()
     set(SYSTEM "unix")
-endif ()
+endif()
 
 include(cmake/settings.cmake)
-include(cmake/library.cmake)
-include(cmake/tools.cmake)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

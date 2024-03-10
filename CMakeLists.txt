@@ -10,5 +10,3 @@ else()
 endif()
 
 include(cmake/settings.cmake)
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

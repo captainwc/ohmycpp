@@ -1,0 +1,29 @@
+/home/shuaikai/project/develop/ohmycpp/include/leetcode/tree_node.h:101:67: performance: Function parameter 'str' should be passed by const reference. [passedByValue]
+std::unique_ptr<TreeNode> deSerializeTreeByLevelOrder(std::string str, std::string null = NULL_NODE,
+                                                                  ^
+/home/shuaikai/project/develop/ohmycpp/include/leetcode/tree_node.h:101:84: performance: Function parameter 'null' should be passed by const reference. [passedByValue]
+std::unique_ptr<TreeNode> deSerializeTreeByLevelOrder(std::string str, std::string null = NULL_NODE,
+                                                                                   ^
+/home/shuaikai/project/develop/ohmycpp/include/leetcode/tree_node.h:160:43: performance: Function parameter 'fileName' should be passed by const reference. [passedByValue]
+void showTree(TreeNode *tree, std::string fileName = "tree") {
+                                          ^
+/home/shuaikai/project/develop/ohmycpp/leetcode/datastructure/lru.cpp:35:9: warning: Class 'List' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+        head_       = new LstNode(-1);
+        ^
+/home/shuaikai/project/develop/ohmycpp/leetcode/datastructure/lru.cpp:35:9: warning: Class 'List' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+        head_       = new LstNode(-1);
+        ^
+/home/shuaikai/project/develop/ohmycpp/leetcode/solutions/977.有序数组的平方.cpp:23:14: style: Unused variable: su [unusedVariable]
+    Solution su;
+             ^
+/home/shuaikai/project/develop/ohmycpp/example/main.cpp:16:9: warning: Class 'Main' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s). [noCopyConstructor]
+        p    = new int(5);
+        ^
+/home/shuaikai/project/develop/ohmycpp/example/main.cpp:16:9: warning: Class 'Main' does not have a operator= which is recommended since it has dynamic memory/resource allocation(s). [noOperatorEq]
+        p    = new int(5);
+        ^
+/home/shuaikai/project/develop/ohmycpp/leetcode/solutions/977.有序数组的平方.cpp:12:0: style: The function 'sortedSquares' is never used. [unusedFunction]
+
+^
+nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingInclude]
+

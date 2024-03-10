@@ -90,7 +90,7 @@ private:
     int                          capacity;
 
 public:
-    LRUCache(int capacity) : capacity(capacity) {
+    explicit LRUCache(int capacity) : capacity(capacity) {
     }
 
     int get(int key) {

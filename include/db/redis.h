@@ -7,7 +7,6 @@
 #include <string>
 
 #include "db.h"
-#include "log/log.h"
 
 class RedisConnector : public Db {
 public:
@@ -36,23 +35,23 @@ RedisConnector::RedisConnector(const std::string& hostname, int port)
     : hostname_(hostname), port_(port), reply_(nullptr) {
     auto p = redisConnect(hostname.c_str(), port);
     if (p == nullptr || p->err) {
-        CONSOLE->error("connect to redis failed!");
+        // CONSOLE->error("connect to redis failed!");
         context_ = nullptr;
     }
     context_ = p;
-    CONSOLE->info("connect to redis successfully!");
+    // CONSOLE->info("connect to redis successfully!");
 }
 
 RedisConnector::~RedisConnector() {
     redisFree(context_);
     delete reply_;
-    CONSOLE->info("unconnect to redis!");
+    // CONSOLE->info("unconnect to redis!");
 }
 
 void RedisConnector::execute(const std::string& command) {
     auto reply = static_cast<redisReply*>(redisCommand(context_, command.c_str()));
     if (reply == nullptr) {
-        CONSOLE->error("command exectuation failed!");
+        // CONSOLE->error("command exectuation failed!");
     }
     reply_ = reply;
 }

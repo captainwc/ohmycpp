@@ -18,7 +18,6 @@
 #include <vector>
 
 #include "leetcode/lc.h"
-#include "log/log.h"
 
 using namespace std;
 

@@ -9,111 +9,136 @@
  * Copyright (c) shuaikai. All rights reserved.
  */
 
-#include "leetcode/lc.h"
+#include <bits/stdc++.h>
+using namespace std;
 
-struct LstNode {
-    int      val;
-    LstNode* prev;
-    LstNode* next;
+/**
+关键在于：
+（1）链表中删除了节点，那么map中对应的键值也要删除！
+（2）上一条要求，node中不仅要存放value，还要存放key
+*/
+struct DLNode {
+    int     key;
+    int     val;
+    DLNode* prev;
+    DLNode* next;
+    DLNode() = default;
 
-    explicit LstNode(int v, LstNode* p = nullptr, LstNode* n = nullptr) : val(v), prev(p), next(n) {
+    DLNode(int k, int v) : key(k), val(v), prev(nullptr), next(nullptr) {
     }
 
-    ~LstNode() {
+    ~DLNode() {
         delete next;
     }
 };
 
-class List {
+class DList {
 private:
-    LstNode* head_;
-    LstNode* tail_;
-    int      size_;
+    DLNode* head;
+    DLNode* tail;
+    int     size_;
 
 public:
-    List() : size_(0) {
-        head_       = new LstNode(-1);
-        tail_       = new LstNode(-2);
-        head_->next = tail_;
-        tail_->prev = head_;
+    DList() : size_(0) {
+        head       = new DLNode();
+        tail       = new DLNode();
+        head->next = tail;
+        tail->prev = head;
     }
 
-    ~List() {
-        delete head_;
+    ~DList() {
+        delete head;
     }
 
-    bool empty() {
-        return head_->next = tail_;
+    [[nodiscard]] bool empty() const {
+        return size_ == 0;
     }
 
-    int size() {
+    [[nodiscard]] int size() const {
         return size_;
     }
 
-    void pop_back() {
-        if (!empty()) {
-            auto p        = tail_->prev;
-            tail_->prev   = p->prev;
-            p->prev->next = tail_;
-            delete p;
-            size_--;
-        }
-    }
-
-    void push_front(LstNode* p) {
+    void push_back(DLNode* p) {
         if (empty()) {
-            head_->next = p;
-            p->prev     = head_;
-            p->next     = tail_;
-            tail_->prev = p;
+            p->next    = tail;
+            p->prev    = head;
+            head->next = p;
+            tail->prev = p;
         } else {
-            p->next       = head_->next;
-            p->prev       = head_;
-            p->next->prev = p;
-            head_->next   = p;
+            p->next       = tail;
+            p->prev       = tail->prev;
+            tail->prev    = p;
+            p->prev->next = p;
         }
         size_++;
     }
 
-    void move_to_head(LstNode* p) {
-        p->prev->next = p->next;
-        p->next->prev = p->prev;
-        size_--;
-        push_front(p);
+    optional<DLNode*> pop() {
+        if (!empty()) {
+            auto p        = head->next;
+            head->next    = p->next;
+            p->next->prev = head;
+            size_--;
+            return make_optional<DLNode*>(p);
+        }
+        return nullopt;
+    }
+
+    DLNode* pop_front() {
+        if (!empty()) {
+            auto p        = head->next;
+            head->next    = p->next;
+            p->next->prev = head;
+            size_--;
+            return p;
+        }
+        return nullptr;
+    }
+
+    void move2back(DLNode* p) {
+        if (p->next != tail) {
+            p->prev->next = p->next;
+            p->next->prev = p->prev;
+            size_--;
+            push_back(p);
+        }
     }
 };
 
 class LRUCache {
 private:
-    unordered_map<int, LstNode*> mp;
-    List                         lst;
-    int                          capacity;
+    unordered_map<int, DLNode*> cache;
+    DList                       list;
+    int                         capacity;
 
 public:
-    LRUCache(int capacity) : capacity(capacity) {
+    explicit LRUCache(int capacity) : capacity(capacity) {
     }
 
     int get(int key) {
-        if (mp.find(key) != mp.end()) {
-            auto target = mp[key];
-            lst.move_to_head(target);
-            return target->val;
+        if (cache.count(key) == 0) {
+            return -1;
         }
-        return -1;
+        auto p = cache[key];
+        list.move2back(p);
+        return p->val;
     }
 
     void put(int key, int value) {
-        if (mp.find(key) != mp.end()) {
-            auto target = mp[key];
-            target->val = value;
-            lst.move_to_head(target);
-        } else {
-            if (lst.size() == capacity) {
-                lst.pop_back();
+        if (cache.count(key) == 0) {
+            if (list.size() >= capacity) {
+                // ! 关键步骤
+                auto p = list.pop_front();
+                cache.erase(p->key);
+                // ！注意这里无需 delete p！因为list会被析构，list包含p
             }
-            auto p  = new LstNode(value);
-            mp[key] = p;
-            lst.push_front(p);
+            auto q     = new DLNode(key, value);
+            cache[key] = q;
+            list.push_back(q);
+        } else {
+            auto p = cache[key];
+            list.move2back(p);
+            p->val = value;
         }
     }
 };

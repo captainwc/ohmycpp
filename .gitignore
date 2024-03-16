@@ -11,3 +11,10 @@ include/tinystl
 log/
 
 *.png
+
+*.exe
+*.ouu
+*.a
+*.so
+*.dll
+*.o

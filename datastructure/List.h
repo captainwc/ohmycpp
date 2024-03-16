@@ -21,8 +21,8 @@ struct ListNode {
 template <typename T>
 class List {
 private:
-    std::unique_ptr<ListNode> dummy_;
-    int                       size_;
+    std::unique_ptr<ListNode<T>> dummy_;
+    int                          size_;
 
 public:
     bool empty() const;

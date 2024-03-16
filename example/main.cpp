@@ -1,23 +1,26 @@
-#include <concepts>
-#include <functional>
 #include <iostream>
 
-template <typename Fn, typename Rt, typename Arg>
-concept UnaryFunction = std::is_invocable_v<Fn, Arg> && std::same_as<Rt, std::invoke_result_t<Fn, Arg>>;
+// 定义模板类 B
+template <typename T>
+class B {
+public:
+    void foo() {
+        std::cout << "Calling foo() from class B" << std::endl;
+    }
+};
 
-template <typename Fn, typename Rt, typename Arg>
-    requires UnaryFunction<Fn, Rt, Arg>
-Rt foo(Fn fn, Arg arg) {
-    return std::invoke(fn, arg);
-}
+// 定义模板类 D，继承自 B
+template <typename T>
+class D : public B<T> {
+public:
+    void bar() {
+        this->foo();  // 调用父类 B 中的 foo 函数
+    }
+};
 
 int main() {
-    std::function<int(int)> f = [](int x) {
-        return x * x;
-    };
+    D<int> dObj;
+    dObj.bar();
 
-    int x = foo<std::function<int(int)>, int>(f, 12);
-    int y = foo<std::function<int(int)>, int, int>(f, 13);
-
-    std::cout << x << y << std::endl;
+    return 0;
 }
